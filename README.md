@@ -1,6 +1,7 @@
 # helloworld-and-lb
 
 #setup abm https://github.com/GoogleCloudPlatform/anthos-samples/tree/main/anthos-bm-edge-deployment#5-configure-the-reverse-proxy-to-route-external-traffic-to-abms-bundled-metal-load-balancer
+#https://layer5.io/learn/learning-paths/mastering-service-meshes-for-developers/introduction-to-service-meshes/istio/expose-services/
 
 #setup GKE standard
 
