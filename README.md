@@ -160,8 +160,8 @@ If you are running the command curl loop from gke only gets results from gke CTX
     kubectl get svc -n istio-system
     kubectl edit svc istio-eastwestgateway -n istio-system
     # externalIPs mapped to the gclb load balancer
-    externalIPs:
-    - 34.149.127.162
+    # externalIPs:
+    # - 34.149.127.162
     kubectl get svc -n istio-system
     curl 34.149.127.162:15443
 
