@@ -138,75 +138,75 @@ I got it working but only from anthos bm cluster Hello version: v1 deployed on a
 If you are running the command curl loop from gke only gets results from gke CTX_2 is gke cluster. Hello v2 deployed on gke
 
 
-Debugging & checking service discovery:
+# Debugging & checking service discovery:
 
-  ./istioctl validate
-  ./istioctl bug-report
-  ./istioctl bug-report
-  ./istioctl proxy-status
-  ./istioctl proxy-config endpoint helloworld-v1-78b9f5c87f-nndtk -n sample | grep hello
-  ./istioctl proxy-config endpoint helloworld-v2-79bf565586-pv96g  -n sample | grep hello
+    ./istioctl validate
+    ./istioctl bug-report
+    ./istioctl bug-report
+    ./istioctl proxy-status
+    ./istioctl proxy-config endpoint helloworld-v1-78b9f5c87f-nndtk -n sample | grep hello
+    ./istioctl proxy-config endpoint helloworld-v2-79bf565586-pv96g  -n sample | grep hello
   
 
-abm ingress ip for gclb: 34.120.74.207
+    abm ingress ip for gclb: 34.120.74.207
 
 
-  566  telnet 10.128.0.37 30810
-  567  telnet 10.128.0.37 30811
-  568  telnet 10.128.0.37 15443
-  569  curl 10.128.0.37:31661/healthz/ready
-  570  curl -I 10.128.0.37:31661/healthz/ready
-  571  kubetl get svc -n istio-system
-  572  kubectl get svc -n istio-system
-  573  kubectl edit svc istio-eastwestgateway -n istio-system
-  # externalIPs mapped to the gclb load balancer
-  externalIPs:
-  - 34.149.127.162
-  574  kubectl get svc -n istio-system
-  575  curl 34.149.127.162:15443
+    566  telnet 10.128.0.37 30810
+    567  telnet 10.128.0.37 30811
+    568  telnet 10.128.0.37 15443
+    569  curl 10.128.0.37:31661/healthz/ready
+    570  curl -I 10.128.0.37:31661/healthz/ready
+    571  kubetl get svc -n istio-system
+    572  kubectl get svc -n istio-system
+    573  kubectl edit svc istio-eastwestgateway -n istio-system
+    # externalIPs mapped to the gclb load balancer
+    externalIPs:
+    - 34.149.127.162
+    574  kubectl get svc -n istio-system
+    575  curl 34.149.127.162:15443
 
 
 
-for CTX in ${CTX_1} ${CTX_2}
-do
-    kubectl create --context=${CTX} namespace sample
-    kubectl label --context=${CTX} namespace sample \
+    for CTX in ${CTX_1} ${CTX_2}
+    do
+       kubectl create --context=${CTX} namespace sample
+       kubectl label --context=${CTX} namespace sample \
         istio-injection- istio.io/rev=REVISION --overwrite
-done
+    done
 
 
-Create the HelloWorld service in both clusters:
+# Create the HelloWorld service in both clusters:
 
 
-kubectl create --context=${CTX_1} \
+    kubectl create --context=${CTX_1} \
     -f ${SAMPLES_DIR}/samples/helloworld/helloworld.yaml \
     -l service=helloworld -n sample
 
-kubectl create --context=${CTX_2} \
+    kubectl create --context=${CTX_2} \
     -f ${SAMPLES_DIR}/samples/helloworld/helloworld.yaml \
     -l service=helloworld -n sample
     
-Deploy hello world
+# Deploy hello world
 
-kubectl create --context=${CTX_1} \
-  -f ${SAMPLES_DIR}/samples/helloworld/helloworld.yaml \
-  -l version=v1 -n sample
+    kubectl create --context=${CTX_1} \
+    -f ${SAMPLES_DIR}/samples/helloworld/helloworld.yaml \
+    -l version=v1 -n sample
 
-kubectl create --context=${CTX_2} \
-  -f ${SAMPLES_DIR}/samples/helloworld/helloworld.yaml \
-  -l version=v2 -n sample
+    kubectl create --context=${CTX_2} \
+    -f ${SAMPLES_DIR}/samples/helloworld/helloworld.yaml \
+    -l version=v2 -n sample
   
-for CTX in ${CTX_1} ${CTX_2}
-do
-    kubectl apply --context=${CTX} \
-        -f ${SAMPLES_DIR}/samples/sleep/sleep.yaml -n sample
-done
+    for CTX in ${CTX_1} ${CTX_2}
+    do
+       kubectl apply --context=${CTX} \
+         -f ${SAMPLES_DIR}/samples/sleep/sleep.yaml -n sample
+    done
 
-  kubectl get pod --context=${CTX_1} -n sample -l app=sleep
+    kubectl get pod --context=${CTX_1} -n sample -l app=sleep
   
-  kubectl get pod --context=${CTX_1} -n sample
+    kubectl get pod --context=${CTX_1} -n sample
   
-  kubectl exec --context="${CTX_1}" -n sample -c sleep \
+    kubectl exec --context="${CTX_1}" -n sample -c sleep \
     "$(kubectl get pod --context="${CTX_1}" -n sample -l \
     app=sleep -o jsonpath='{.items[0].metadata.name}')" \
     -- /bin/sh -c 'for i in $(seq 1 20); do curl -sS helloworld.sample:5000/hello; done'
