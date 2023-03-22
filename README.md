@@ -1,5 +1,8 @@
 # helloworld-and-lb
 
+visual summary: https://docs.google.com/presentation/d/1cRKj9oAA8rcx70ZLf26jlUliKIZ1R9jwDwfwWpTsqNI/edit?resourcekey=0-0MXkrqcw12Br3KkTo-5bTw#slide=id.g2138c3765e4_0_29
+
+
 #setup abm 
 
 1. https://github.com/GoogleCloudPlatform/anthos-samples/tree/main/anthos-bm-edge-deployment#5-configure-the-reverse-proxy-to-route-external-traffic-to-abms-bundled-metal-load-balancer
