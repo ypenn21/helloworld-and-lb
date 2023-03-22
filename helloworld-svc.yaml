@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: helloworld
+    service: helloworld
+  annotations:
+    cloud.google.com/neg: '{"exposed_ports": {"5000":{"name": "app-service-5000-neg"}}}'
+  name: helloworld
+  namespace: sample
+spec:
+  ports:
+  - name: http
+    port: 5000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: helloworld
+  sessionAffinity: None
+  type: ClusterIP
