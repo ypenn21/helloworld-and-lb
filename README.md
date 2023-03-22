@@ -7,7 +7,7 @@
 2. https://cloud.google.com/service-mesh/docs/unified-install/multi-cloud-hybrid-mesh 
 
 
-2. Setup GKE standard
+3. Setup GKE standard. Name for gke cluster I used is c2
 
 
 https://cloud.google.com/service-mesh/docs/unified-install/multi-cloud-hybrid-mesh
