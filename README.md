@@ -92,7 +92,7 @@ $maybe need to run
     app=sleep -o jsonpath='{.items[0].metadata.name}')" \
     -- /bin/sh -c 'for i in $(seq 1 20); do curl -sS 34.120.74.207/hello; done'
 
-
+```
 ---
 apiVersion: v1
 kind: Namespace
@@ -128,7 +128,7 @@ spec:
   - kubernetes
 status:
   phase: Active
-
+```
 
 
 issue:
