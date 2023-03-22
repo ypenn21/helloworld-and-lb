@@ -151,19 +151,19 @@ If you are running the command curl loop from gke only gets results from gke CTX
     abm ingress ip for gclb: 34.120.74.207
 
 
-    566  telnet 10.128.0.37 30810
-    567  telnet 10.128.0.37 30811
-    568  telnet 10.128.0.37 15443
-    569  curl 10.128.0.37:31661/healthz/ready
-    570  curl -I 10.128.0.37:31661/healthz/ready
-    571  kubetl get svc -n istio-system
-    572  kubectl get svc -n istio-system
-    573  kubectl edit svc istio-eastwestgateway -n istio-system
+    telnet 10.128.0.37 30810
+    telnet 10.128.0.37 30811
+    telnet 10.128.0.37 15443
+    curl 10.128.0.37:31661/healthz/ready
+    curl -I 10.128.0.37:31661/healthz/ready
+    kubetl get svc -n istio-system
+    kubectl get svc -n istio-system
+    kubectl edit svc istio-eastwestgateway -n istio-system
     # externalIPs mapped to the gclb load balancer
     externalIPs:
     - 34.149.127.162
-    574  kubectl get svc -n istio-system
-    575  curl 34.149.127.162:15443
+    kubectl get svc -n istio-system
+    curl 34.149.127.162:15443
 
 
 
