@@ -4,10 +4,10 @@
 
 1. https://github.com/GoogleCloudPlatform/anthos-samples/tree/main/anthos-bm-edge-deployment#5-configure-the-reverse-proxy-to-route-external-traffic-to-abms-bundled-metal-load-balancer
 
+2. https://cloud.google.com/service-mesh/docs/unified-install/multi-cloud-hybrid-mesh 
 
-2. https://layer5.io/learn/learning-paths/mastering-service-meshes-for-developers/introduction-to-service-meshes/istio/expose-services/
 
-#setup GKE standard
+2. Setup GKE standard
 
 
 https://cloud.google.com/service-mesh/docs/unified-install/multi-cloud-hybrid-mesh
@@ -215,3 +215,8 @@ If you are running the command curl loop from gke only gets results from gke CTX
     "$(kubectl get pod --context="${CTX_1}" -n sample -l \
     app=sleep -o jsonpath='{.items[0].metadata.name}')" \
     -- /bin/sh -c 'for i in $(seq 1 20); do curl -sS helloworld.sample:5000/hello; done'
+    
+    
+# Service Mesh additional
+
+https://layer5.io/learn/learning-paths/mastering-service-meshes-for-developers/introduction-to-service-meshes/istio/expose-services/
